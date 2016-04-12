@@ -83,6 +83,8 @@
                     <httpConnector>
                         <port>8090</port>
                     </httpConnector>
+                    <stopPort>8091</stopPort>
+                    <stopKey>foo</stopKey>
                 </configuration>
             </plugin>
         </plugins>

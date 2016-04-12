@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WoatController extends WeixinControllerSupport {
     private static final Logger log = LoggerFactory.getLogger(WoatController.class);
     private static final String TOKEN = "hulumanWoatToken"; // TODO Create with Token Generator
-    private static final String APP_ID = "appId"; // TODO Create with Token Generator
-    private static final String AES_KEY = "aesKey"; // TODO Create with Token Generator
+    private static final String APP_ID = null; // TODO Create with Token Generator
+    private static final String AES_KEY = null; // TODO Create with Token Generator
 
     //设置TOKEN，用于绑定微信服务器
     @Override

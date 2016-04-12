@@ -4,6 +4,7 @@ import com.github.sd4324530.fastweixin.message.BaseMsg;
 import com.github.sd4324530.fastweixin.message.TextMsg;
 import com.github.sd4324530.fastweixin.message.req.TextReqMsg;
 import com.github.sd4324530.fastweixin.servlet.WeixinControllerSupport;
+import com.huluman.woat.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,28 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/weixin")
 public class WoatController extends WeixinControllerSupport {
     private static final Logger log = LoggerFactory.getLogger(WoatController.class);
-    private static final String TOKEN = "hulumanWoatToken"; // TODO Create with Token Generator
-    private static final String APP_ID = null; // TODO Create with Token Generator
-    private static final String AES_KEY = null; // TODO Create with Token Generator
+
 
     //设置TOKEN，用于绑定微信服务器
     @Override
     protected String getToken() {
-        return TOKEN;
+        return Constants.TOKEN;
     }
 
     //使用安全模式时设置：APPID
     //不再强制重写，有加密需要时自行重写该方法
     @Override
     protected String getAppId() {
-        return APP_ID;
+        return Constants.APP_ID;
     }
 
     //使用安全模式时设置：密钥
     //不再强制重写，有加密需要时自行重写该方法
     @Override
     protected String getAESKey() {
-        return AES_KEY;
+        return Constants.AES_KEY;
     }
 
     //重写父类方法，处理对应的微信消息

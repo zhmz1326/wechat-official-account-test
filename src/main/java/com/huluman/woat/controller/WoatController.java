@@ -45,6 +45,16 @@ public class WoatController extends WeixinControllerSupport {
         // 消息类型
         // https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140543&token=&lang=zh_CN
         log.debug("Message from user:{}", content);
-        return new TextMsg("Response: Thank you!");
+        String response;
+        if("1".equals(content)) {
+            response = "Yuhang Life";
+        } else if("2".equals(content)) {
+            response = "Yuhang Groumet";
+        } else if("3".equals(content)) {
+            response = "Yuhang Entertainment";
+        } else {
+            response = "Menu:\n1.Life\n2.Groumet\n3.Entertaiment\nTel:13011111111";
+        }
+        return new TextMsg(response);
     }
 }

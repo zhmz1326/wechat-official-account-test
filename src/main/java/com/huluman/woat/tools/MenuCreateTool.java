@@ -22,7 +22,7 @@ public class MenuCreateTool {
 
     private ApiConfig config;
 
-    public void init() {
+    private void init() {
         config = new ApiConfig(Constants.APP_ID, Constants.APP_SECRET);
         DefaultConfigChangeHandler configChangeHandle = new DefaultConfigChangeHandler();
         config.addHandle(configChangeHandle);
@@ -38,21 +38,22 @@ public class MenuCreateTool {
 
         //先删除之前的菜单
         menuAPI.deleteMenu();
-        Menu request = new Menu();
+        Menu menu = new Menu();
         //准备一级主菜单
-        MenuButton main1 = new MenuButton();
-        main1.setType(MenuType.CLICK);
-        main1.setKey("main1");
-        main1.setName("测试");
+        MenuButton menu1 = new MenuButton();
+        menu1.setType(MenuType.CLICK);
+        menu1.setKey("menu1");
+        menu1.setName("生活");
         //准备子菜单
         MenuButton sub1 = new MenuButton();
-        sub1.setKey("sub1");
-        sub1.setName("授权");
+        sub1.setKey("2");
+        sub1.setName("Baidu");
         sub1.setType(MenuType.VIEW);
-        sub1.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxafb7b8f9457b5d50&redirect_uri=http://121.40.140.41/erhuluanzi/app/testGet&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
+        sub1.setUrl("http://www.baidu.com");
+        //sub1.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxafb7b8f9457b5d50&redirect_uri=http://121.40.140.41/erhuluanzi/app/testGet&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
         MenuButton sub2 = new MenuButton();
-        sub2.setKey("sub2");
-        sub2.setName("点击");
+        sub2.setKey("3");
+        sub2.setName("Entertaiment");
         sub2.setType(MenuType.CLICK);
 
 
@@ -60,15 +61,21 @@ public class MenuCreateTool {
         list.add(sub1);
         list.add(sub2);
         //将子菜单放入主菜单里
-        main1.setSubButton(list);
+        menu1.setSubButton(list);
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();
-        mainList.add(main1);
+        mainList.add(menu1);
         //将主菜单加入请求对象
-        request.setButton(mainList);
-        LOG.debug(request.toJsonString());
+        menu.setButton(mainList);
+        LOG.debug(menu.toJsonString());
         //创建菜单
-        ResultType resultType = menuAPI.createMenu(request);
+        ResultType resultType = menuAPI.createMenu(menu);
         LOG.debug(resultType.toString());
+    }
+
+    public static void main(String[] args) {
+        MenuCreateTool tool = new MenuCreateTool();
+        tool.init();
+        tool.createMenu(tool.config);
     }
 }

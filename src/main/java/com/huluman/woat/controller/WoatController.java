@@ -2,6 +2,7 @@ package com.huluman.woat.controller;
 
 import com.github.sd4324530.fastweixin.message.BaseMsg;
 import com.github.sd4324530.fastweixin.message.TextMsg;
+import com.github.sd4324530.fastweixin.message.req.BaseEvent;
 import com.github.sd4324530.fastweixin.message.req.TextReqMsg;
 import com.github.sd4324530.fastweixin.servlet.WeixinControllerSupport;
 import com.huluman.woat.util.Constants;
@@ -43,6 +44,11 @@ public class WoatController extends WeixinControllerSupport {
         // TODO Implement it
         // 消息类型
         // https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140543&token=&lang=zh_CN
+        String response = processContent(content);
+        return new TextMsg(response);
+    }
+
+    private String processContent(String content) {
         log.debug("Message from user:{}", content);
         String response;
         if("1".equals(content)) {
@@ -54,6 +60,13 @@ public class WoatController extends WeixinControllerSupport {
         } else {
             response = "Menu:\n1.Life\n2.Groumet\n3.Entertaiment\nTel:13011111111";
         }
+        return response;
+    }
+
+    protected BaseMsg handleDefaultEvent(BaseEvent event) {
+        String content = event.getEvent();
+
+        String response = processContent(content);
         return new TextMsg(response);
     }
 }

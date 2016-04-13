@@ -1,15 +1,10 @@
 package com.huluman.woat.tools;
 
 import com.github.sd4324530.fastweixin.api.MenuAPI;
-import com.github.sd4324530.fastweixin.api.config.ApiConfig;
 import com.github.sd4324530.fastweixin.api.entity.Menu;
 import com.github.sd4324530.fastweixin.api.entity.MenuButton;
 import com.github.sd4324530.fastweixin.api.enums.MenuType;
 import com.github.sd4324530.fastweixin.api.enums.ResultType;
-import com.huluman.woat.handler.DefaultConfigChangeHandler;
-import com.huluman.woat.util.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +12,12 @@ import java.util.List;
 /**
  * Created by Zhengmingzhi on 2016/4/12.
  */
-public class MenuCreateTool {
-    private static final Logger LOG = LoggerFactory.getLogger(MenuCreateTool.class);
-
-    private ApiConfig config;
-
-    private void init() {
-        config = new ApiConfig(Constants.APP_ID, Constants.APP_SECRET);
-        DefaultConfigChangeHandler configChangeHandle = new DefaultConfigChangeHandler();
-        config.addHandle(configChangeHandle);
-    }
+public class MenuCreateTool extends WoatTool {
 
     /**
      * 创建菜单
-     *
-     * @param config API配置
      */
-    private void createMenu(ApiConfig config) {
+    private void createMenu() {
         MenuAPI menuAPI = new MenuAPI(config);
 
         //先删除之前的菜单
@@ -76,6 +60,6 @@ public class MenuCreateTool {
     public static void main(String[] args) {
         MenuCreateTool tool = new MenuCreateTool();
         tool.init();
-        tool.createMenu(tool.config);
+        tool.createMenu();
     }
 }

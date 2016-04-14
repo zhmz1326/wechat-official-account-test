@@ -2,7 +2,7 @@ package com.huluman.woat.controller;
 
 import com.github.sd4324530.fastweixin.message.BaseMsg;
 import com.github.sd4324530.fastweixin.message.TextMsg;
-import com.github.sd4324530.fastweixin.message.req.BaseEvent;
+import com.github.sd4324530.fastweixin.message.req.MenuEvent;
 import com.github.sd4324530.fastweixin.message.req.TextReqMsg;
 import com.github.sd4324530.fastweixin.servlet.WeixinControllerSupport;
 import com.huluman.woat.util.Constants;
@@ -63,8 +63,8 @@ public class WoatController extends WeixinControllerSupport {
         return response;
     }
 
-    protected BaseMsg handleDefaultEvent(BaseEvent event) {
-        String content = event.getEvent();
+    protected BaseMsg handleMenuClickEvent(MenuEvent event) {
+        String content = event.getEventKey();
 
         String response = processContent(content);
         return new TextMsg(response);

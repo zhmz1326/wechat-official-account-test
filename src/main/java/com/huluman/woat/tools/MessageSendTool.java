@@ -7,6 +7,8 @@ import com.github.sd4324530.fastweixin.api.enums.MediaType;
 import com.github.sd4324530.fastweixin.api.response.GetSendMessageResponse;
 import com.github.sd4324530.fastweixin.api.response.UploadMediaResponse;
 import com.github.sd4324530.fastweixin.message.MpNewsMsg;
+import com.github.sd4324530.fastweixin.message.TextMsg;
+import com.huluman.woat.util.WoatUtil;
 
 import java.io.File;
 import java.util.Arrays;
@@ -16,9 +18,9 @@ import java.util.Arrays;
  */
 public class MessageSendTool extends WoatTool{
 
-    public void sendAllMessage(){
+    public void sendAllMpNewsMessage(){
         MediaAPI mediaAPI = new MediaAPI(config);
-        UploadMediaResponse response = mediaAPI.uploadMedia(MediaType.IMAGE, new File("D:\\2041.jpg"));
+        UploadMediaResponse response = mediaAPI.uploadMedia(MediaType.IMAGE, new File("img/2041.jpg"));
         String media_id = response.getMediaId();
         Article article = new Article(media_id, "测试用户", "群发测试", "http://www.baidu.com", "群发测试", "群发测试", Article.ShowConverPic.NO);
         UploadMediaResponse uploadMediaResponse = mediaAPI.uploadNews(Arrays.asList(article));
@@ -29,9 +31,16 @@ public class MessageSendTool extends WoatTool{
         LOG.info("Send Message Id is " + messageResponse.getMsgId());
     }
 
+    public void sendAllTextMessage(){
+        TextMsg textMsg = new TextMsg("Today is " + WoatUtil.currentDateTime());
+        MessageAPI messageAPI = new MessageAPI(config);
+        GetSendMessageResponse messageResponse = messageAPI.sendMessageToUser(textMsg, true, "0", null);
+        LOG.info("Send Message Id is " + messageResponse.getMsgId());
+    }
+
     public static void main(String[] args) {
         MessageSendTool tool = new MessageSendTool();
         tool.init();
-        tool.sendAllMessage();
+        tool.sendAllTextMessage();
     }
 }
